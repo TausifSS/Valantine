@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to top, #f72c8e, #ff7eb3, #f91ca8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            color: white;
+            font-size: 28px;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: rgb(95, 11, 8) 2px solid;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+        #yes {
+            background-color: #f30d0d;
+            color: white;
+            
+            
+        }
+        #yes:hover {
+           
+        }
+        #no {
+            background-color: #dc3545;
+            color: white;
+            position: absolute;
+        }
+        .popup {
+            display: none;
+            position: absolute;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 1s ease-in-out;  /* Popup slow animation */
+        }
+        @keyframes flowerFly {
+            from { transform: translateY(100vh) scale(0.5); opacity: 1; }
+            to { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        }
+        
+        .flower {
+            position: absolute;
+            font-size: 20px; 
+            animation: flowerFly 10s linear infinite;
+            pointer-events: none; 
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hi! Will you be my Valentine? 💖</h1>
+        <div class="buttons">
+            <button id="yes" onclick="goToLoveStory()">YES</button>
+            <button id="no" onmouseover="moveNoButton()" onmouseenter="showPopup()" onmouseleave="hidePopup()">NO</button>
+        </div>
+    </div>
+    <div class="popup" id="popup">Awww! kithhe jarii ho, cutie pie! 💕</div>
+    
+    <script>
+        function moveNoButton() {
+            let noButton = document.getElementById("no");
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 50);
+            noButton.style.left = `${x}px`;
+            noButton.style.top = `${y}px`;
+        }
+        function createFlowers() {
+            for (let i = 0; i < 50; i++) { // 50 flowers create honge
+                let flower = document.createElement("div");
+                flower.classList.add("flower");
+                flower.innerHTML = "💘💞"; // Red Rose Emoji
+                flower.style.left = Math.random() * 100 + "vw"; // Random horizontal position
+                flower.style.top = Math.random() * 100 + "vh"; // Random vertical position
+                flower.style.animationDuration = Math.random() * 5 + 5 + "s"; // Different speed
+        
+                document.body.appendChild(flower);
+            }
+        }
+        
+        createFlowers();
+        function createFlowers() {
+            for (let i = 0; i < 50; i++) { // 50 flowers create honge
+                let flower = document.createElement("div");
+                flower.classList.add("flower");
+                flower.innerHTML = "💞"; // Red Rose Emoji
+                flower.style.left = Math.random() * 100 + "vw"; // Random horizontal position
+                flower.style.top = Math.random() * 100 + "vh"; // Random vertical position
+                flower.style.animationDuration = Math.random() * 5 + 5 + "s"; // Different speed
+        
+                document.body.appendChild(flower);
+            }
+        }
+        
+        createFlowers();
+        function goToLoveStory() {
+            window.location.href = "finalpage.html";  // Linked to next page
+        }
+        
+        function showPopup() {
+            let popup = document.getElementById("popup");
+            popup.style.display = "block";
+            setTimeout(() => popup.style.opacity = "1", 100);  // Slow fade-in
+        }
+        function hidePopup() {
+            let popup = document.getElementById("popup");
+            popup.style.opacity = "0"; 
+            setTimeout(() => popup.style.display = "none", 1000);  // Slow fade-out
+        }
+    </script>
+</body>
+</html>

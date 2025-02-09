@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Story Begins</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes flowerFly {
+            from { transform: translateY(100vh) scale(0.5); opacity: 1; }
+            to { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        }
+        
+        .flower {
+            position: absolute;
+            font-size: 40px; /* Bada size */
+            animation: flowerFly 10s linear infinite;
+            pointer-events: none; /* Click hone ka effect na aaye */
+        }
+        
+        .continue {
+            margin-top: 20px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="loveCanvas"></canvas>  
+    <div class="heart-full" id="big-heart">❤️</div>
+    <div class="container">
+        <h1>Chalo, ek kahani sunata hoon... ✨</h1>
+        <p style="color: white; font-size: 20px; animation: fadeIn 3s ease-in-out;">
+            Yeh kahani ek aise ehsaas ki hai, jo aankhon se nahi, dil se mehsoos hoti hai... ❤️
+        </p>
+        <div class="continue">
+            <button onclick="goToNextPage()">Continue ➤</button>
+        </div>
+        
+    </div>
+    
+    <script>
+        function goToNextPage() {
+            window.location.href = "letter1.html"; 
+        }
+        
+        function createFlowers() {
+            for (let i = 0; i < 50; i++) { // 50 flowers create honge
+                let flower = document.createElement("div");
+                flower.classList.add("flower");
+                flower.innerHTML = "❤️"; // Red Rose Emoji
+                flower.style.left = Math.random() * 100 + "vw"; // Random horizontal position
+                flower.style.top = Math.random() * 100 + "vh"; // Random vertical position
+                flower.style.animationDuration = Math.random() * 5 + 5 + "s"; // Different speed
+        
+                document.body.appendChild(flower);
+            }
+        }
+        
+        createFlowers(); // Call function to create flowers
+        
+        
+        // Canvas Heart Effect
+        const canvas = document.getElementById('loveCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let hearts = [];
+
+        function createHeart() {
+            let size = Math.random() * 5 + 2;
+            let x = Math.random() * canvas.width;
+            let y = canvas.height + size;
+            let speed = Math.random() * 2 + 1;
+            hearts.push({ x, y, size, speed });
+        }
+
+        function drawHearts() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "red";
+            hearts.forEach((heart, index) => {
+                ctx.beginPath();
+                ctx.arc(heart.x, heart.y, heart.size, 0, Math.PI * 2);
+                ctx.fill();
+                heart.y -= heart.speed;
+                if (heart.y < 0) hearts.splice(index, 1);
+            });
+        }
+
+        function animateHearts() {
+            createHeart();
+            drawHearts();
+            requestAnimationFrame(animateHearts);
+        }
+
+        animateHearts();
+    </script>
+</body>
+</html>
